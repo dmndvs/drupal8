@@ -1,0 +1,69 @@
+{
+  "name": "dmndvs/drupal8",
+  "description": "Drupal8",
+  "type": "project",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "dmndvs",
+      "role": ""
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.8",
+    "composer/installers": "^1.2",
+    "cweagans/composer-patches": "^1.6.5",
+    "drupal/console": "^1.0.2",
+    "drupal/core": "8.8.2",
+    "drupal/core-composer-scaffold": "^8.8.0",
+    "drush/drush": "^9.7.1 | ^10.0.0",
+    "vlucas/phpdotenv": "^4.0",
+    "webflo/drupal-finder": "^1.0.0",
+    "zaporylie/composer-drupal-optimizations": "^1.0"
+  },
+  "require-dev": {
+    "drupal/core-dev": "^8.8.0"
+  },
+  "conflict": {
+    "drupal/drupal": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+    ],
+    "post-update-cmd": [
+      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+    ]
+  },
+  "extra": {
+    "composer-exit-on-patch-failure": true,
+    "patchLevel": {
+      "drupal/core": "-p2"
+    },
+    "drupal-scaffold": {
+      "source": "https://raw.githubusercontent.com/drupal/drupal/{version}/{path}",
+      "locations": {
+        "web-root": "docroot/"
+      }
+    },
+    "installer-paths": {
+      "docroot/core": ["type:drupal-core"],
+      "docroot/libraries/{$name}": ["type:drupal-library"],
+      "docroot/modules/contrib/{$name}": ["type:drupal-module"],
+      "docroot/profiles/contrib/{$name}": ["type:drupal-profile"],
+      "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
+      "drush/Commands/contrib/{$name}": ["type:drupal-drush"]
+    }
+  }
+}
